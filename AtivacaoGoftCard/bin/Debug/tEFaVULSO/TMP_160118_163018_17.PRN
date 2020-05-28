@@ -1,0 +1,33 @@
+
+  .....S.O.F.T.W.A.R.E.E.X.P.R.E.S.S....   
+ SI                              Rede 5    
+ MU               Codigo transacao: 200    
+ LA               Codigo operacao: 2000    
+ DO                         Valor: 1,00    
+ .....S...I...M...U...L...A...D...O....    
+ SI                   NSU SiTef: 160004    
+ MU                      16/01/18 16:26    
+ LA                    ID PDV: sw000001    
+ DO             Estab.: 000000000000005    
+ .....S...I...M...U...L...A...D...O....    
+ SI                     Host: 999160004    
+ MU         Transacao Simulada Aprovada    
+                                (SiTef)    
+
+ cliente                                   
+ ----------------------------------------- 
+ loja                                      
+  .....S.O.F.T.W.A.R.E.E.X.P.R.E.S.S....   
+ SI                              Rede 5    
+ MU               Codigo transacao: 200    
+ LA               Codigo operacao: 2000    
+ DO                         Valor: 1,00    
+ .....S...I...M...U...L...A...D...O....    
+ SI                   NSU SiTef: 160004    
+ MU                      16/01/18 16:26    
+ LA                    ID PDV: sw000001    
+ DO             Estab.: 000000000000005    
+ .....S...I...M...U...L...A...D...O....    
+ SI                     Host: 999160004    
+ MU         Transacao Simulada Aprovada    
+                                (SiTef)

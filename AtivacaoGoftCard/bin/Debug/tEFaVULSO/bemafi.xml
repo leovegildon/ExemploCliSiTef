@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<bematech>
+    <Sistema>
+        <Porta>COM8</Porta>
+        <BaudRate>9600</BaudRate>
+        <Path>C:\proton\pdv-client\paf\</Path>
+        <Status>0</Status>
+        <Retorno>0</Retorno>
+        <StatusFuncao>0</StatusFuncao>
+        <ControlePorta>1</ControlePorta>
+        <ConfigRede>0</ConfigRede>
+        <NivelLog>1</NivelLog>
+        <ModoGaveta>0</ModoGaveta>
+        <CrLfVinculado>1</CrLfVinculado>
+        <CrLfGerencial>1</CrLfGerencial>
+        <TimeOutReducaoZ>99</TimeOutReducaoZ>
+        <TimeOutGerencialExtendido>40</TimeOutGerencialExtendido>
+        <Tentativas>999</Tentativas>
+        <WakMilisegundos>100</WakMilisegundos>
+        <TimeoutSegundos>180</TimeoutSegundos>
+        <VersaoAtoCotepe>1</VersaoAtoCotepe>
+        <CleanValidation>0</CleanValidation>
+        <TimeoutEscritaPorta>100</TimeoutEscritaPorta>
+        <TimeoutLeituraPorta>10000</TimeoutLeituraPorta>
+    </Sistema>
+    <Fiscal>
+        <ProtocoloUnico>0</ProtocoloUnico>
+        <GerarRFD>0</GerarRFD>
+        <CAT52>0</CAT52>
+        <CupomMania>0</CupomMania>
+        <MinasLegal>0</MinasLegal>
+        <NotaLegal>0</NotaLegal>
+        <ParaibaLegal>0</ParaibaLegal>
+        <CupomAdicional>0</CupomAdicional>
+        <NotaFiscalParanaense>0</NotaFiscalParanaense>
+    </Fiscal>
+    <MFD>
+        <Impressora>1</Impressora>
+        <EmulMFD>0</EmulMFD>
+    </MFD>
+    <Aliquotas>
+        <Aliquota01 Valor="" Tipo="" />
+        <Aliquota02 Valor="" Tipo="" />
+        <Aliquota03 Valor="" Tipo="" />
+        <Aliquota04 Valor="" Tipo="" />
+        <Aliquota05 Valor="" Tipo="" />
+        <Aliquota06 Valor="" Tipo="" />
+        <Aliquota07 Valor="" Tipo="" />
+        <Aliquota08 Valor="" Tipo="" />
+        <Aliquota09 Valor="" Tipo="" />
+        <Aliquota10 Valor="" Tipo="" />
+        <Aliquota11 Valor="" Tipo="" />
+        <Aliquota12 Valor="" Tipo="" />
+        <Aliquota13 Valor="" Tipo="" />
+        <Aliquota14 Valor="" Tipo="" />
+        <Aliquota15 Valor="" Tipo="" />
+        <Aliquota16 Valor="" Tipo="" />
+    </Aliquotas>
+    <SoftwareHouse>
+        <COO />
+        <NumeroAplicativo />
+        <CNPJ />
+        <IE />
+        <IM />
+        <RazaoSocial />
+        <NomeAplicativo />
+        <Versao />
+        <Linha1 />
+        <Linha2 />
+        <IM_ECF />
+        <UF />
+    </SoftwareHouse>
+    <ChequeOpcional>
+        <Cidade />
+        <Favorecido />
+    </ChequeOpcional>
+</bematech>

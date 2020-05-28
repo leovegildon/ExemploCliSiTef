@@ -1,0 +1,33 @@
+ .....S.O.F.T.W.A.R.E.E.X.P.R.E.S.S....
+SI                              Rede 5
+MU               Codigo transacao: 200
+LA               Codigo operacao: 3000
+DO                         Valor: 1,00
+.....S...I...M...U...L...A...D...O....
+SI                   NSU SiTef: 300015
+MU                      30/04/19 16:05
+LA                    ID PDV: SW000001
+DO             Estab.: 000000000000005
+.....S...I...M...U...L...A...D...O....
+SI                     Host: 999300015
+MU         Transacao Simulada Aprovada
+                               (SiTef)
+
+cliente
+------------------------------------------------
+loja
+ .....S.O.F.T.W.A.R.E.E.X.P.R.E.S.S....
+SI                              Rede 5
+MU               Codigo transacao: 200
+LA               Codigo operacao: 3000
+DO                         Valor: 1,00
+.....S...I...M...U...L...A...D...O....
+SI                   NSU SiTef: 300015
+MU                      30/04/19 16:05
+LA                    ID PDV: SW000001
+DO             Estab.: 000000000000005
+.....S...I...M...U...L...A...D...O....
+SI                     Host: 999300015
+MU         Transacao Simulada Aprovada
+                               (SiTef)
+
