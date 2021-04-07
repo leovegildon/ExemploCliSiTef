@@ -30,3 +30,4 @@ D:\usuarios\leovegildoneto\Dropbox\Dropbox\Projetos Le biscuit\AtivacaoGoftCard\
 D:\usuarios\leovegildoneto\Dropbox\Dropbox\Projetos Le biscuit\AtivacaoGoftCard\AtivacaoGoftCard\obj\Debug\AtivacaoGoftCard.Form1.resources
 D:\usuarios\leovegildoneto\Dropbox\Dropbox\Projetos Le biscuit\AtivacaoGoftCard\AtivacaoGoftCard\obj\Debug\AtivacaoGoftCard.Properties.Resources.resources
 D:\usuarios\leovegildoneto\Dropbox\Dropbox\Projetos Le biscuit\AtivacaoGoftCard\AtivacaoGoftCard\obj\Debug\AtivacaoGoftCard.csproj.GenerateResource.Cache
+D:\usuarios\leovegildoneto\Dropbox\Dropbox\Projetos Le biscuit\AtivacaoGoftCard\AtivacaoGoftCard\obj\Debug\AtivacaoGoftCard.FormComprovante.resources

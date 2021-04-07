@@ -20,7 +20,8 @@ namespace AtivacaoGoftCard
         int tipoCampo = 0;
         int tamanhoMin = 0;
         int tamanhoMax = 0;
-        byte[] buffer = new byte[200];
+        byte[] buffer = new byte[10000];
+        byte[] bufferEnvio = new byte[10000];
         int retornoContinua = -999;
         int continua = 0;
         int ponteiro = 0;
@@ -28,13 +29,24 @@ namespace AtivacaoGoftCard
 
         private void button1_Click(object sender, EventArgs e)
         {
+            lblStatusFluxo.Text = "Fluxo Iniciado.";
+            lblStatusFluxo.ForeColor = Color.Green;
+            //Reiniciando Data e Hora
+            txtData.Text = DateTime.Now.ToString("yyyyMMdd");
+            txtHora.Text = DateTime.Now.ToString("HHmmss");
+
+            //Caso a comunicação não esteja configurada (IniciaSiTefInterativo)
             if (txtRetornoSitef.Text == "")
                 MessageBox.Show("Configure a comunicação primeiro");
             else
             {
-                //button1.Enabled = false;
-                int retornoInicio = CliSiTef.IniciaFuncaoSiTefInterativo(Convert.ToInt32(txtCodBarras.Text), txtValor.Text, txtCupom.Text, txtData.Text, txtHora.Text, txtOperador.Text, txtRestricoes.Text);
-                //MessageBox.Show("IniciaFuncaoSiTefInterativo = " + retornoInicio.ToString());
+                int retornoInicio = CliSiTef.IniciaFuncaoSiTefInterativo(Convert.ToInt32(txtCodBarras.Text), 
+                    txtValor.Text, 
+                    txtCupom.Text, 
+                    txtData.Text, 
+                    txtHora.Text, 
+                    txtOperador.Text,
+                    "'"+txtRestricoes.Text+"'");
                 txtRetornoIniciaSitef.Text = retornoInicio.ToString();
                 if (retornoInicio == 10000)
                 {
@@ -62,18 +74,18 @@ namespace AtivacaoGoftCard
 
             private void Form1_Load(object sender, EventArgs e)
             {
-
-                timer1.Interval = 350;
+                txtData.Text = DateTime.Now.ToString("yyyyMMdd");
+                txtHora.Text = DateTime.Now.ToString("HHmmss");
+                timer1.Interval = 150;
 
             }
 
             private void button2_Click(object sender, EventArgs e)
             {
-                //tamanhoBuffer = txtBufferEnvio.TextLength;
-                //buffer = Encoding.ASCII.GetBytes(txtBufferEnvio.Text);
                 valorTMP = System.Text.Encoding.ASCII.GetString(buffer);
-                buffer = Encoding.ASCII.GetBytes(txtBufferEnvio.Text);
-                //MessageBox.Show("Valor do buffer: " + valorTMP + "\n" + "Tamanho do buffer: " + tamanhoBuffer);
+                richTituloVisor.Text = ""; //Armengue para limpar o título do visor pois a CliSiTef não está comandando essa ação.
+                bufferEnvio = Encoding.ASCII.GetBytes(txtBufferEnvio.Text);
+                retornoContinua = CliSiTef.ContinuaFuncaoSiTefInterativo(ref comando, ref tipoCampo, ref tamanhoMin, ref tamanhoMax, bufferEnvio, tamanhoBuffer, continua);
                 timer1.Start();
             }
 
@@ -89,45 +101,71 @@ namespace AtivacaoGoftCard
 
             private void timer1_Tick(object sender, EventArgs e)
             {
+                lblStatusFluxo.Text = "CliSiTef Devolvendo dados.";
+                lblStatusFluxo.ForeColor = Color.Yellow;
+                tamanhoBuffer = 20000;
+                buffer = new byte[10000]; // Reiniciando o buffer
+                retornoContinua = CliSiTef.ContinuaFuncaoSiTefInterativo(ref comando, ref tipoCampo, ref tamanhoMin, ref tamanhoMax, buffer, tamanhoBuffer, continua);
                 txtMinBuffer.Text = tamanhoMin.ToString();
                 txtMaxBuffer.Text = tamanhoMax.ToString();
-                 tamanhoBuffer = buffer.Length;
-                 
-                    retornoContinua = CliSiTef.ContinuaFuncaoSiTefInterativo(ref comando, ref tipoCampo, ref tamanhoMin, ref tamanhoMax, buffer, tamanhoBuffer, continua);
-                     
                 string Mensagem = System.Text.Encoding.ASCII.GetString(buffer);
                 
                 
-                    //richBufferRetorno.Text = Mensagem;
                     txtRetornoContinua.Text = retornoContinua.ToString();
                     System.IO.StreamWriter log = new System.IO.StreamWriter("log.txt", true);
                     txtRetornoComando.Text = comando.ToString();
                     txtRetornoTipoCampo.Text = tipoCampo.ToString();
                     log.WriteLine(comando+"|"+tipoCampo+"| "+Mensagem);
                     log.Close();
-                    richBufferRetorno.Text = Mensagem;
+                    richBufferRetorno.Text = Mensagem;//Preenchendo o valor retornado no buffer para apresentar no visor
 
-                //tratamento do comando para visor
+                    //tratamento do comando para visor
                     if (comando == 1) { ritchVisor.Text = Mensagem; }
                     if (comando == 3) { ritchVisor.Text = Mensagem; }
                     if (comando == 4) { richTituloVisor.Text = Mensagem; }
+                    if (comando == 13) { ritchVisor.Text = ""; richTituloVisor.Text = ""; }
                     if (comando == 14) { richTituloVisor.Text = ""; }
                     if (comando == 21) { ritchVisor.Text = Mensagem; }
                     if (comando == 22) { ritchVisor.Text = Mensagem; }
+                    if (comando == 30) { ritchVisor.Text = Mensagem; }
 
-                    if (retornoContinua == -9) { ritchVisor.Text = "    ** LEOVEGILDO **\n     ** SISTEMAS **"; }
-                    
-                        
-                    
-                    
-                    //MessageBox.Show("Comando: " + comando.ToString() + "\n" + "tipoCampo: " + tipoCampo);
-
-                    if ((comando == 21) || (comando ==  29) || (comando ==  30) || (comando ==  31) || (comando ==  34) || (comando ==  35) || (comando ==  41) || (comando ==  42))
+                    //Tratamento do comando para comprovante
+                    if (tipoCampo == 121)
                     {
+                        FormComprovante comprovanteObj = new FormComprovante(Mensagem);
+                        comprovanteObj.Show();
+                        DialogResult efetuar = MessageBox.Show("Selecione SIM para EFETUAR a transação, NÃO para DESFAZER a transação ou CANCELAR para manter a transação PENDENTE", "Efetuar?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                        if(efetuar == DialogResult.Yes)
+                        {
+                            CliSiTef.FinalizaTransacaoSiTefInterativo(1, txtCupom.Text, txtData.Text, txtHora.Text);
+                        }
+
+                        if (efetuar == DialogResult.No)
+                        {
+                            CliSiTef.FinalizaTransacaoSiTefInterativo(0, txtCupom.Text, txtData.Text, txtHora.Text);
+                        }
+                    }
+
+                    
+                    //Tratamento dos retornos e comandos para encerramento do fluxo
+                    if ((retornoContinua == -9) || (comando == 21) || (comando == 22) || (comando == 29) || (comando == 30) || (comando == 31) || (comando == 34) || (comando == 35) || (comando == 41) || (comando == 42))
+                    {
+                        lblStatusFluxo.Text = "Aguardando dado no Buffer.";
+                        lblStatusFluxo.ForeColor = Color.Yellow;
+
+                        if (retornoContinua == -9)
+                        {
+                            ritchVisor.Text = ""+
+"  "+
+"                   ** LEOVEGILDO ** "+
+"                     ** SISTEMAS **" +
+"";
+                            lblStatusFluxo.Text = "Fluxo Encerrado.";
+                            lblStatusFluxo.ForeColor = Color.Red;
+                        } //Se fluxo encerrado
+
                         timer1.Stop();
                     }
-                    
-
                 //MessageBox.Show("Saiu do laço");
             }
 
